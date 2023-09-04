@@ -105,4 +105,6 @@ public class ProductController {
 
         response.getWriter().flush();
     }
+
+    //StringEscapeUtils.escapeHtml4(param)
 }

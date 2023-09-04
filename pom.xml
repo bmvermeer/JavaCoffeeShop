@@ -90,6 +90,16 @@
             <artifactId>datafaker</artifactId>
             <version>1.7.0</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.commons</groupId>-->
+<!--            <artifactId>commons-text</artifactId>-->
+<!--            <version>1.10.0</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.70</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -103,6 +113,24 @@
                         -Dcom.sun.jndi.ldap.object.trustURLCodebase=true
                     </jvmArguments>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Configure the output directory for the dependencies -->
+                            <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

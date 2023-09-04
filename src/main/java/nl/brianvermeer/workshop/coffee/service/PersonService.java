@@ -10,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -18,15 +20,25 @@ public class PersonService {
     private PersonRepository personRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private EncryptionServiceDes encryptionService;
 
 
     public List<Person> getAllPersons() {
-        return personRepository.findAll();
+        return personRepository.findAll().stream().map(this::decryptPerson).collect(Collectors.toList());
     }
 
     public Person savePerson(Person person) {
         if (person.getPassword() != null && !person.getPassword().isEmpty()) {
             person.setEncryptedPassword(passwordEncoder.encode(person.getPassword()));
+        }
+        try {
+            var address = person.getAddress();
+            if (address != null) {
+                person.setAddress(encryptionService.encrypt(person.getAddress()));
+            }
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
         }
         return personRepository.save(person);
     }
@@ -66,5 +78,15 @@ public class PersonService {
         person.setRoles(Role.ROLE_CUSTOMER);
 
         return savePerson(person);
+    }
+
+    private Person decryptPerson(Person p) {
+        try {
+            var address = encryptionService.decrypt(p.getAddress());
+            p.setAddress(address);
+            return p;
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
