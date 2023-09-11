@@ -2,6 +2,7 @@ package nl.brianvermeer.workshop.coffee.controller;
 
 import nl.brianvermeer.workshop.coffee.domain.Person;
 import nl.brianvermeer.workshop.coffee.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,9 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
-    private final PersonService personService;
 
-    public ProfileController(PersonService personService) {
-        this.personService = personService;
-    }
+    @Autowired
+    private PersonService personService;
 
     @GetMapping
     public String showProfile(Model model, Principal principal) {

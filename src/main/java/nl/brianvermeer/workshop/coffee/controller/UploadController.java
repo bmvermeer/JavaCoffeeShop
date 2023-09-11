@@ -1,6 +1,7 @@
 package nl.brianvermeer.workshop.coffee.controller;
 
 import nl.brianvermeer.workshop.coffee.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +17,10 @@ import java.security.Principal;
 @Controller
 public class UploadController {
 
-    private final PersonService personService;
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+    @Autowired
+    private PersonService personService;
 
-    public UploadController(PersonService personService) {
-        this.personService = personService;
-    }
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 
     @GetMapping("/uploadimage") public String displayUploadForm() {
         return "person/upload";

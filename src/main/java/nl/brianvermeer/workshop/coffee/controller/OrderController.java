@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.Date;
@@ -38,15 +37,12 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private final ProductService productService;
-    private final OrderService orderService;
-    private final PersonService personService;
-
-    public OrderController(ProductService productService, OrderService orderService, PersonService personService) {
-        this.productService = productService;
-        this.orderService = orderService;
-        this.personService = personService;
-    }
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private PersonService personService;
 
     @ModelAttribute("products")
     public List<Product> populateProducts() {
