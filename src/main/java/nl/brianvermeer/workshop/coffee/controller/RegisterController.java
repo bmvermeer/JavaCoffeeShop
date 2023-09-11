@@ -4,7 +4,6 @@ import nl.brianvermeer.workshop.coffee.domain.Person;
 import nl.brianvermeer.workshop.coffee.exception.EmailTakenException;
 import nl.brianvermeer.workshop.coffee.exception.UsernameTakenException;
 import nl.brianvermeer.workshop.coffee.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
@@ -23,9 +22,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+
     private final PersonService personService;
 
-    @Autowired
     public RegisterController(PersonService personService) {
         this.personService = personService;
     }

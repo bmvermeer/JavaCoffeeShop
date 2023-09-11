@@ -37,12 +37,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
-    @Autowired private ProductService productService;
-    @Autowired private OrderService orderService;
-    @Autowired private PersonService personService;
 
+    private final ProductService productService;
+    private final OrderService orderService;
+    private final PersonService personService;
 
-
+    public OrderController(ProductService productService, OrderService orderService, PersonService personService) {
+        this.productService = productService;
+        this.orderService = orderService;
+        this.personService = personService;
+    }
 
     @ModelAttribute("products")
     public List<Product> populateProducts() {

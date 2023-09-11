@@ -2,7 +2,6 @@ package nl.brianvermeer.workshop.coffee.controller;
 
 import nl.brianvermeer.workshop.coffee.domain.Person;
 import nl.brianvermeer.workshop.coffee.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 public class PersonController {
     private final PersonService personService;
 
-    @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
