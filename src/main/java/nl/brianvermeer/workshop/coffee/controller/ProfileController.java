@@ -17,12 +17,9 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
-    private final PersonService personService;
 
     @Autowired
-    public ProfileController(PersonService personService) {
-        this.personService = personService;
-    }
+    private PersonService personService;
 
     @GetMapping
     public String showProfile(Model model, Principal principal) {

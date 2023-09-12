@@ -20,12 +20,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-    private ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    private ProductService productService;
 
     @GetMapping("/add")
     public String showProductAdd(Model model) {

@@ -12,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-    private ProductService productService;
+    @Autowired
+    private  ProductService productService;
+    @Autowired
     private SearchRepository searchRepository;
 
-    @Autowired
-    public HomeController(ProductService productService, SearchRepository searchRepository) {
-        this.productService = productService;
-        this.searchRepository = searchRepository;
-    }
 
     @GetMapping({"/", "/index", "/home"})
     public String homePage(Model model) {

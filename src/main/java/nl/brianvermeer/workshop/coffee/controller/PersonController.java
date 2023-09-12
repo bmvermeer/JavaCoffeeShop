@@ -17,12 +17,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/persons")
 public class PersonController {
-    private final PersonService personService;
 
     @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
+    private  PersonService personService;
 
     @GetMapping
     public String listPersons(Model model) {
