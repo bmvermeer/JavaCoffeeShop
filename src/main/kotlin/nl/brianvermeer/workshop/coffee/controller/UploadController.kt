@@ -23,7 +23,7 @@ class UploadController ( private val personService: PersonService) {
     @PostMapping("/uploadimage")
     @Throws(IOException::class)
     fun uploadImage(model: Model, @RequestParam("image") file: MultipartFile, principal: Principal): String {
-        val name = file.originalFilename.replace(" ", "_")
+        val name = file.originalFilename?.replace(" ", "_") ?: ""
         val fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, name)
         Files.write(fileNameAndPath, file.bytes)
         model.addAttribute("msg", "Uploaded images: $name")
