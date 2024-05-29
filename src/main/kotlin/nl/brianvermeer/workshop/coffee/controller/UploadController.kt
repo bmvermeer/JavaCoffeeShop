@@ -15,6 +15,8 @@ import java.security.Principal
 @Controller
 class UploadController ( private val personService: PersonService) {
 
+    var UPLOAD_DIRECTORY: String = System.getProperty("user.dir") + "/uploads"
+
     @GetMapping("/uploadimage")
     fun displayUploadForm(): String {
         return "person/upload"
@@ -34,9 +36,5 @@ class UploadController ( private val personService: PersonService) {
         person.profilePic = name
         personService.savePerson(person)
         return "person/upload"
-    }
-
-    companion object {
-        var UPLOAD_DIRECTORY: String = System.getProperty("user.dir") + "/uploads"
     }
 }
